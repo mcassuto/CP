@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_product_margin_std_price_graph" model="ir.ui.view">
+            <field name="name">product.margin.std.price.graph</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <graph string="Sales Margins" type="bar">
+                    <field name="name"/>
+                    <field name="turnover" operator="+"/>
+                    <field name="total_cost" operator="+"/>
+                </graph>
+            </field>
+    </record>
+
+     <record id="view_product_margin_std_price_form" model="ir.ui.view">
+            <field name="name">product.margin.std.price.form</field>
+            <field name="model">product.product</field>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                 <form string="Sales Margins" version="7.0">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="default_code"/>
+                    </group>
+                    <notebook>
+                    <page string="Margins">
+                        <group string="Analysis Criteria">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <newline/>
+                            <field name="invoice_state" />
+
+                            <separator string="Sales" colspan="4"/>
+                            <field name="list_price"
+                                   string="Ref. Sale Price"
+                                   readonly="1"/>
+                            <field name="sale_avg_price"
+                                    string="Avg. Sale Price"/>
+                            <field name="sale_num_invoiced" />
+                            <field name="turnover" />
+                            <field name="sale_expected" />
+                            <field name="sales_gap" />
+
+                            <separator string="Cost" colspan="4"/>
+                            <field name="standard_price"
+                                   string="Cost Price"
+                                   readonly="1"/>
+
+                            <separator string="Margins" colspan="4"/>
+                            <field name="th_gross_margin"/>
+                            <field name="gross_margin"/>
+                            <field name="th_gross_margin_rate"
+                                   widget="progressbar"/>
+                            <field name="gross_margin_rate"
+                                   widget="progressbar"/>
+                         </group>
+                    </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_margin_std_price_tree" model="ir.ui.view">
+            <field name="name">product.margin.std.price.tree</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <tree string="Sales Margins">
+                    <field name="name"/>
+                    <field name="default_code" invisible="1"/>
+                    <field name="list_price"/>
+                    <field name="sale_avg_price"/>
+                    <field name="sale_num_invoiced"/>
+                    <field name="standard_price"/>
+                    <field name="th_gross_margin"/>
+                    <field name="gross_margin"/>
+                    <field name="th_gross_margin_rate"  widget="progressbar"/>
+                    <field name="gross_margin_rate" widget="progressbar"/>
+                    <field name="categ_id" invisible="1"/>
+                    <field name="uom_id" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="product_margin_search_form_view" model="ir.ui.view">
+            <field name="name">product.margin.search.form</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Product">
+                   <field name="name" string="Product" filter_domain="['|',('name','ilike',self),('default_code','ilike',self)]"/>
+                   <separator/>
+                   <filter string="Invoiced"
+                           name="filter_invoiced"
+                           domain="[('sale_num_invoiced','!=',0)]"/>
+                   <field name="categ_id"/>
+                   <group expand="0" string="Context...">
+                       <field name="pricelist_id" widget="selection" context="{'pricelist': self}" filter_domain="[]" groups="product.group_sale_pricelist"/> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
+                       <field name="company_id" groups="base.group_multi_company"/>
+                   </group>
+                   <group  expand='0' string='Group by...'>
+                       <filter string='Category' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'categ_id'}"/>
+                       <filter string='Default Unit of Measure' icon="terp-mrp" domain="[]" context="{'group_by' : 'uom_id'}"/>
+                       <filter string='Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'type'}"/>
+                       <filter string='Company' icon="terp-go-home" domain="[]" context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
+                   </group>
+                </search>
+            </field>
+        </record>
+
+  <menuitem
+          id="menu_action_product_margin_std_price"
+          name="Sales Margins (cost price)"
+          parent="base.next_id_64"
+          icon="STOCK_JUSTIFY_FILL"
+          action="product_margin_std_price_act_window"
+          sequence="50" />
+
+</data>
+</openerp>
