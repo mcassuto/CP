@@ -136,6 +136,7 @@ class ProductProduct(osv.osv):
             multi='product_margin',
             store=True,
             help="Sum of Quantity in Customer Invoices"),
+        # New columns
         'th_gross_margin': fields.function(
             _product_margin,
             type='float',
