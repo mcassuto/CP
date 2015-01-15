@@ -124,6 +124,10 @@ class ProductProduct(osv.osv):
             if 'gross_margin_rate' in field_names:
                 res[val.id]['gross_margin_rate'] =\
                     res[val.id]['gross_margin']
+            if 'total_margin_on_cost' in field_names:
+                res[val.id]['total_margin_on_cost'] =\
+                    res[val.id]['turnover'] -\
+                    (res[val.id]['sale_num_invoiced'] * val.standard_price)
 
         return res
 
@@ -161,6 +165,12 @@ class ProductProduct(osv.osv):
             string='Gross Margin on invoices (%)',
             multi='product_margin',
             help="Gross Margin on invoices * 100 / Cost price"),
+        'total_margin_on_cost': fields.function(
+            _product_margin,
+            type='float',
+            string='Total Margin on cost',
+            multi='product_margin',
+            help="Total invoiced - Total cost (on standard price)"),
 
     }
 

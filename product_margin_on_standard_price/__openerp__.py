@@ -52,7 +52,7 @@ Contributors
         'wizard/product_margin_view.xml',
         'product_margin_view.xml'
     ],
-    #'test':['test/product_margin.yml'],
+    'test':['test/product_margin.yml'],
     'demo': [],
     'installable': True,
     'auto_install': False,

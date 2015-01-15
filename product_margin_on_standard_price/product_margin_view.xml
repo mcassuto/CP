@@ -39,13 +39,12 @@
                             <field name="sale_avg_price"
                                     string="Avg. Invoiced Price"/>
                             <field name="sale_num_invoiced" />
-                            <field name="turnover" />
                             <field name="sale_expected" />
                             <field name="sales_gap" />
 
                             <separator string="Cost" colspan="4"/>
                             <field name="standard_price"
-                                   string="Cost Price"
+                                   string="Manuf. Cost"
                                    readonly="1"/>
 
                             <separator string="Margins" colspan="4"/>
@@ -55,6 +54,10 @@
                                    widget="progressbar"/>
                             <field name="gross_margin_rate"
                                    widget="progressbar"/>
+
+                            <separator string="Totals" colspan="4"/>
+                            <field name="turnover"/>
+                            <field name="total_margin_on_cost"/>
                          </group>
                     </page>
                     </notebook>
@@ -73,41 +76,31 @@
                     <field name="list_price" string="List Price"/>
                     <field name="sale_avg_price" string="Avg. Invoiced Price"/>
                     <field name="sale_num_invoiced" string="# Invoiced"/>
-                    <field name="standard_price" string="Cost Price"/>
-                    <field name="th_gross_margin"/>
-                    <field name="gross_margin"/>
-                    <field name="th_gross_margin_rate"  widget="progressbar"/>
-                    <field name="gross_margin_rate" widget="progressbar"/>
+                    <field name="standard_price" string="Manuf. Cost"/>
+                    <field name="th_gross_margin" sum="th_gross_margin"/>
+                    <field name="gross_margin" sum="gross_margin"/>
+                    <field name="th_gross_margin_rate"/>
+                    <field name="gross_margin_rate"/>
+                    <field name="total_margin_on_cost" sum="total_margin_on_cost"/>
                     <field name="categ_id" invisible="1"/>
                     <field name="uom_id" invisible="1"/>
                     <field name="type" invisible="1"/>
                     <field name="company_id" invisible="1"/>
-            </tree>
+                </tree>
             </field>
         </record>
 
         <record id="product_margin_search_form_view" model="ir.ui.view">
             <field name="name">product.margin.search.form</field>
             <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
             <field name="arch" type="xml">
-                <search string="Product">
-                   <field name="name" string="Product" filter_domain="['|',('name','ilike',self),('default_code','ilike',self)]"/>
+                <filter name="filter_to_sell" position="after">
                    <separator/>
                    <filter string="Invoiced"
                            name="filter_invoiced"
                            domain="[('sale_num_invoiced','!=',0)]"/>
-                   <field name="categ_id"/>
-                   <group expand="0" string="Context...">
-                       <field name="pricelist_id" widget="selection" context="{'pricelist': self}" filter_domain="[]" groups="product.group_sale_pricelist"/> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
-                       <field name="company_id" groups="base.group_multi_company"/>
-                   </group>
-                   <group  expand='0' string='Group by...'>
-                       <filter string='Category' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'categ_id'}"/>
-                       <filter string='Default Unit of Measure' icon="terp-mrp" domain="[]" context="{'group_by' : 'uom_id'}"/>
-                       <filter string='Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'type'}"/>
-                       <filter string='Company' icon="terp-go-home" domain="[]" context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
-                   </group>
-                </search>
+                </filter>
             </field>
         </record>
 

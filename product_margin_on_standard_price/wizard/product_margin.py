@@ -23,6 +23,9 @@ import time
 
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
+from datetime import date, timedelta, datetime
+from dateutil import parser
+from dateutil.relativedelta import relativedelta
 
 
 class ProductMarginStdPrice(osv.osv_memory):
@@ -41,8 +44,14 @@ class ProductMarginStdPrice(osv.osv_memory):
             required=True),
     }
     _defaults = {
-        'from_date': time.strftime('%Y-01-01'),
-        'to_date': time.strftime('%Y-12-31'),
+        'from_date': lambda *a: (
+            parser.parse(datetime.now().strftime('%Y-%m-01')) +
+            relativedelta(months=-1)
+        ).strftime('%Y-%m-%d'),
+        'to_date': lambda *a: (
+            parser.parse(datetime.now().strftime('%Y-%m-01')) +
+            relativedelta(days=-1)
+        ).strftime('%Y-%m-%d'),
         'invoice_state': "open_paid",
     }
 
@@ -77,10 +86,18 @@ class ProductMarginStdPrice(osv.osv_memory):
         )
         view_res = cr.fetchone()[0]
 
-        search_view = mod_obj.get_object_reference(
-            cr, uid,
-            'product_margin_on_standard_price',
-            'product_margin_search_form_view')
+        cr.execute(
+            'select id, name from ir_ui_view where name=%s and type=%s',
+            ('product.margin.search.form', 'search')
+        )
+        search_view = cr.fetchone()[0]
+        print search_view
+        print id['res_id']
+
+        # search_view = mod_obj.get_object_reference(
+        #     cr, uid,
+        #     'product_margin_on_standard_price',
+        #     'product_margin_search_form_view')
 
         #get the current product.margin object to obtain the values from it
         product_margin_obj = self.browse(cr, uid, ids, context=context)[0]
@@ -102,8 +119,9 @@ class ProductMarginStdPrice(osv.osv_memory):
                 (view_res2, 'form'),
                 (view_res3, 'graph')],
             'view_id': False,
-            'domain': "[('sale_ok','=',1)]",
-            'search_view_id': search_view and search_view[1] or id['res_id']
+            'context': "{'search_default_filter_to_sell':1, \
+                        'search_default_filter_invoiced':1}",
+            'search_view_id':  id['res_id'],
         }
 
 ProductMarginStdPrice()
