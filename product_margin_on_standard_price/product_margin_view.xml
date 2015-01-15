@@ -37,7 +37,7 @@
                                    string="List Price"
                                    readonly="1"/>
                             <field name="sale_avg_price"
-                                    string="Avg. Sale Price"/>
+                                    string="Avg. Invoiced Price"/>
                             <field name="sale_num_invoiced" />
                             <field name="turnover" />
                             <field name="sale_expected" />
@@ -71,9 +71,9 @@
                     <field name="name"/>
                     <field name="default_code" invisible="1"/>
                     <field name="list_price" string="List Price"/>
-                    <field name="sale_avg_price"/>
-                    <field name="sale_num_invoiced"/>
-                    <field name="standard_price"/>
+                    <field name="sale_avg_price" string="Avg. Invoiced Price"/>
+                    <field name="sale_num_invoiced" string="# Invoiced"/>
+                    <field name="standard_price" string="Cost Price"/>
                     <field name="th_gross_margin"/>
                     <field name="gross_margin"/>
                     <field name="th_gross_margin_rate"  widget="progressbar"/>
