@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-15 02:10+0000\n"
-"PO-Revision-Date: 2015-01-15 02:10+0000\n"
+"POT-Creation-Date: 2015-01-15 23:07+0000\n"
+"PO-Revision-Date: 2015-01-15 23:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -42,32 +42,17 @@ msgstr ""
 
 #. module: product_margin_on_standard_price
 #: view:product.product:0
-msgid "Category"
-msgstr ""
-
-#. module: product_margin_on_standard_price
-#: view:product.product:0
-msgid "Company"
-msgstr ""
-
-#. module: product_margin_on_standard_price
-#: view:product.product:0
-msgid "Context..."
-msgstr ""
-
-#. module: product_margin_on_standard_price
-#: view:product.product:0
 msgid "Cost"
 msgstr ""
 
 #. module: product_margin_on_standard_price
-#: view:product.product:0
-msgid "Cost Price"
+#: selection:product.margin.std.price,invoice_state:0
+msgid "Draft, Open and Paid"
 msgstr ""
 
 #. module: product_margin_on_standard_price
-#: view:product.product:0
-msgid "Default Unit of Measure"
+#: field:product.margin.std.price,from_date:0
+msgid "From"
 msgstr ""
 
 #. module: product_margin_on_standard_price
@@ -101,8 +86,8 @@ msgid "Gross Margin on list price * 100 / Cost price"
 msgstr ""
 
 #. module: product_margin_on_standard_price
-#: view:product.product:0
-msgid "Group by..."
+#: field:product.margin.std.price,invoice_state:0
+msgid "Invoice State"
 msgstr ""
 
 #. module: product_margin_on_standard_price
@@ -122,12 +107,27 @@ msgstr ""
 
 #. module: product_margin_on_standard_price
 #: view:product.product:0
+msgid "Manuf. Cost"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
 msgid "Margins"
 msgstr ""
 
 #. module: product_margin_on_standard_price
 #: view:product.margin.std.price:0
 msgid "Open Margins"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: selection:product.margin.std.price,invoice_state:0
+msgid "Open and Paid"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: selection:product.margin.std.price,invoice_state:0
+msgid "Paid"
 msgstr ""
 
 #. module: product_margin_on_standard_price
@@ -138,7 +138,6 @@ msgstr ""
 #. module: product_margin_on_standard_price
 #: code:_description:0
 #: model:ir.model,name:product_margin_on_standard_price.model_product_product
-#: view:product.product:0
 #, python-format
 msgid "Product"
 msgstr ""
@@ -154,7 +153,7 @@ msgid "Sales"
 msgstr ""
 
 #. module: product_margin_on_standard_price
-#: code:addons/product_margin_on_standard_price/wizard/product_margin.py:94
+#: code:addons/product_margin_on_standard_price/wizard/product_margin.py:111
 #: model:ir.actions.act_window,name:product_margin_on_standard_price.product_margin_std_price_act_window
 #: view:product.product:0
 #, python-format
@@ -170,12 +169,42 @@ msgid "Sales Margins (cost price)"
 msgstr ""
 
 #. module: product_margin_on_standard_price
+#: field:product.margin.std.price,to_date:0
+msgid "To"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: field:product.product,total_margin_on_cost:0
+msgid "Total Margin on cost"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: help:product.product,total_margin_on_cost:0
+msgid "Total invoiced - Total cost (on standard price)"
+msgstr ""
+
+#. module: product_margin_on_standard_price
 #: view:product.product:0
-msgid "Type"
+msgid "Totals"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "gross_margin"
 msgstr ""
 
 #. module: product_margin_on_standard_price
 #: view:product.margin.std.price:0
 msgid "or"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "th_gross_margin"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "total_margin_on_cost"
 msgstr ""
 
