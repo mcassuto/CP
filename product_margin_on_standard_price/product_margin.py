@@ -140,27 +140,27 @@ class ProductProduct(osv.osv):
         'th_gross_margin': fields.function(
             _product_margin,
             type='float',
-            string='Th. Gross Margin',
+            string='Gross Margin on list price',
             multi='product_margin',
             help="List price - Cost price"),
         'th_gross_margin_rate': fields.function(
             _product_margin,
             type='float',
-            string='Th. Gross Margin (%)',
+            string='Gross Margin on list price (%)',
             multi='product_margin',
-            help="Th. Gross Margin * 100 / Cost price"),
+            help="Gross Margin on list price * 100 / Cost price"),
         'gross_margin': fields.function(
             _product_margin,
             type='float',
-            string='Gross Margin',
+            string='Gross Margin on invoices',
             multi='product_margin',
-            help="Average Sale Price - Cost price"),
+            help="Average Invoiced Price - Cost price"),
         'gross_margin_rate': fields.function(
             _product_margin,
             type='float',
-            string='Gross Margin (%)',
+            string='Gross Margin on invoices (%)',
             multi='product_margin',
-            help="Gross Margin * 100 / Cost price"),
+            help="Gross Margin on invoices * 100 / Cost price"),
 
     }
 
