@@ -1,0 +1,181 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* product_margin_on_standard_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-15 02:10+0000\n"
+"PO-Revision-Date: 2015-01-15 02:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "# Invoiced"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Analysis Criteria"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: help:product.product,gross_margin:0
+msgid "Average Invoiced Price - Cost price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Avg. Invoiced Price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.margin.std.price:0
+msgid "Cancel"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Category"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Company"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Context..."
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Cost"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Cost Price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Default Unit of Measure"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: field:product.product,gross_margin:0
+msgid "Gross Margin on invoices"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: field:product.product,gross_margin_rate:0
+msgid "Gross Margin on invoices (%)"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: help:product.product,gross_margin_rate:0
+msgid "Gross Margin on invoices * 100 / Cost price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: field:product.product,th_gross_margin:0
+msgid "Gross Margin on list price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: field:product.product,th_gross_margin_rate:0
+msgid "Gross Margin on list price (%)"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: help:product.product,th_gross_margin_rate:0
+msgid "Gross Margin on list price * 100 / Cost price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Group by..."
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Invoiced"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "List Price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: help:product.product,th_gross_margin:0
+msgid "List price - Cost price"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Margins"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.margin.std.price:0
+msgid "Open Margins"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.margin.std.price:0
+msgid "Parameters"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: code:_description:0
+#: model:ir.model,name:product_margin_on_standard_price.model_product_product
+#: view:product.product:0
+#, python-format
+msgid "Product"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.margin.std.price:0
+msgid "Properties categories"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Sales"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: code:addons/product_margin_on_standard_price/wizard/product_margin.py:94
+#: model:ir.actions.act_window,name:product_margin_on_standard_price.product_margin_std_price_act_window
+#: view:product.product:0
+#, python-format
+msgid "Sales Margins"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: code:_description:0
+#: model:ir.model,name:product_margin_on_standard_price.model_product_margin_std_price
+#: model:ir.ui.menu,name:product_margin_on_standard_price.menu_action_product_margin_std_price
+#, python-format
+msgid "Sales Margins (cost price)"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.product:0
+msgid "Type"
+msgstr ""
+
+#. module: product_margin_on_standard_price
+#: view:product.margin.std.price:0
+msgid "or"
+msgstr ""
+
