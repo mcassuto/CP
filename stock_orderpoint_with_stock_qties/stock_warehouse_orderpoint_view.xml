@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="orderpoint_with_stock_qties_form" model="ir.ui.view">
+            <field name="name">orderpoint.with.stock.qties.form</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id"
+                   ref="procurement.view_warehouse_orderpoint_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_max_qty" position="after">
+                   <field name="qty_available"/>
+                   <field name="virtual_available"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
