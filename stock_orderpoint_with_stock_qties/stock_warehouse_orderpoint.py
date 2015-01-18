@@ -25,7 +25,8 @@ from openerp.osv import fields, osv
 class StockWarehouseOrderpoint(osv.osv):
     _inherit = "stock.warehouse.orderpoint"
 
-    def _product_available(self, cr, uid, ids, field_names=None, arg=False, context=None):
+    def _product_available(self, cr, uid, ids, field_names=None, arg=False,
+                           context=None):
         """ Finds the incoming and outgoing quantity of product.
         @return: Dictionary of values
         """
@@ -41,23 +42,25 @@ class StockWarehouseOrderpoint(osv.osv):
             # Compute Quantity On Hand
             states = ('done',)
             c = context.copy()
-            c.update({ 'states': states,
-                       'what': ('in', 'out'),
-                       'location': val.location_id.id,
-                       'product_id': val.product_id.id})
-            result = product_obj.get_product_available(cr, uid,
+            c.update({'states': states,
+                      'what': ('in', 'out'),
+                      'location': val.location_id.id,
+                      'product_id': val.product_id.id})
+            result = product_obj.get_product_available(cr,
+                                                       uid,
                                                        [val.product_id.id],
                                                        context=c)
             res[val.id]['qty_available'] = result[val.product_id.id]
 
             # Compute Virtual Quantity
-            states = ('confirmed','waiting','assigned','done')
+            states = ('confirmed', 'waiting', 'assigned', 'done')
             c = context.copy()
-            c.update({ 'states': states,
-                       'what': ('in', 'out'),
-                       'location': val.location_id.id,
-                       'product_id': val.product_id.id})
-            result = product_obj.get_product_available(cr, uid,
+            c.update({'states': states,
+                      'what': ('in', 'out'),
+                      'location': val.location_id.id,
+                      'product_id': val.product_id.id})
+            result = product_obj.get_product_available(cr,
+                                                       uid,
                                                        [val.product_id.id],
                                                        context=c)
             res[val.id]['virtual_available'] = result[val.product_id.id]
@@ -65,13 +68,13 @@ class StockWarehouseOrderpoint(osv.osv):
         return res
 
     _columns = {
-        'qty_available' : fields.function(
+        'qty_available': fields.function(
             _product_available,
             type='float',
             multi='qty_available',
             string='Quantity On Hand',
             help="Quantity available at this location"),
-        'virtual_available' : fields.function(
+        'virtual_available': fields.function(
             _product_available,
             type='float',
             multi='qty_available',
@@ -79,4 +82,3 @@ class StockWarehouseOrderpoint(osv.osv):
             help="Forecasted Quantity at this location \
                 (computed as Quantity On Hand - Outgoing + Incoming)"),
     }
-

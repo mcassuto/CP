@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-         <record id="product_margin_std_price_wizard_view" model="ir.ui.view">
+        <record id="product_margin_std_price_wizard_view" model="ir.ui.view">
             <field name="name">product.margin.std.price.wizard</field>
             <field name="model">product.margin.std.price</field>
             <field name="arch" type="xml">
@@ -12,9 +12,14 @@
                         <field name="invoice_state" />
                     </group>
                     <footer>
-                        <button name="action_open_window" string="Open Margins" type="object"  class="oe_highlight"  />
+                        <button name="action_open_window"
+                                string="Open Margins"
+                                type="object"
+                                class="oe_highlight"  />
                         or
-                        <button string="Cancel" class="oe_link" special="cancel" />
+                        <button string="Cancel"
+                                class="oe_link"
+                                special="cancel" />
                     </footer>
                 </form>
             </field>

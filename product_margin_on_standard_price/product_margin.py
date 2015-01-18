@@ -133,7 +133,7 @@ class ProductProduct(osv.osv):
 
     _columns = {
         # Override this field ot have it stored; needed for the search view
-        'sale_num_invoiced' : fields.function(
+        'sale_num_invoiced': fields.function(
             _product_margin,
             type='float',
             string='# Invoiced in Sale',

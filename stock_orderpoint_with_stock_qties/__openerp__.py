@@ -26,7 +26,7 @@
     'version': "1.0",
     'depends': [
         'procurement',
-        'stock'
+        'product'
     ],
     'author': "Marc Cassuto",
     'category': "Stock",

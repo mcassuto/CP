@@ -19,11 +19,9 @@
 #
 ##############################################################################
 
-import time
-
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
-from datetime import date, timedelta, datetime
+from datetime import datetime
 from dateutil import parser
 from dateutil.relativedelta import relativedelta
 
@@ -86,19 +84,6 @@ class ProductMarginStdPrice(osv.osv_memory):
         )
         view_res = cr.fetchone()[0]
 
-        cr.execute(
-            'select id, name from ir_ui_view where name=%s and type=%s',
-            ('product.margin.search.form', 'search')
-        )
-        search_view = cr.fetchone()[0]
-        print search_view
-        print id['res_id']
-
-        # search_view = mod_obj.get_object_reference(
-        #     cr, uid,
-        #     'product_margin_on_standard_price',
-        #     'product_margin_search_form_view')
-
         #get the current product.margin object to obtain the values from it
         product_margin_obj = self.browse(cr, uid, ids, context=context)[0]
 
@@ -107,6 +92,9 @@ class ProductMarginStdPrice(osv.osv_memory):
             context.update(date_from=product_margin_obj.from_date)
         if product_margin_obj.to_date:
             context.update(date_to=product_margin_obj.to_date)
+
+        context.update({'search_default_filter_to_sell': 1,
+                        'search_default_filter_invoiced': 1})
         return {
             'name': _('Sales Margins'),
             'context': context,
@@ -119,8 +107,6 @@ class ProductMarginStdPrice(osv.osv_memory):
                 (view_res2, 'form'),
                 (view_res3, 'graph')],
             'view_id': False,
-            'context': "{'search_default_filter_to_sell':1, \
-                        'search_default_filter_invoiced':1}",
             'search_view_id':  id['res_id'],
         }
 
