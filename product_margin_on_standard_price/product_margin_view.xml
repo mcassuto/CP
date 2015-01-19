@@ -75,7 +75,6 @@
                     <field name="default_code" invisible="1"/>
                     <field name="list_price" string="List Price"/>
                     <field name="sale_avg_price" string="Avg. Invoiced Price"/>
-                    <field name="sale_num_invoiced" string="# Invoiced"/>
                     <field name="standard_price" string="Manuf. Cost"/>
                     <field name="th_gross_margin" sum="th_gross_margin"/>
                     <field name="gross_margin" sum="gross_margin"/>

@@ -22,6 +22,7 @@
 import time
 
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 
 class ProductProduct(osv.osv):
@@ -131,6 +132,43 @@ class ProductProduct(osv.osv):
 
         return res
 
+    def _sale_num_invoiced_search(self, cr, uid, obj, field_name, criterion,
+                                  context=None):
+
+        if context is None:
+            context = {}
+        if not len(criterion):
+            return []
+        product_ids = []
+        op = criterion[0][1]
+        value = criterion[0][2]
+
+        # Authorized criterion on a float field
+        import operator as o
+        OPERATOR_MAP = {
+            '=': o.eq,
+            '!=': o.ne,
+            '>=': o.ge,
+            '<=': o.le,
+            '>': o.gt,
+            '<': o.lt,
+            }
+        if not op in OPERATOR_MAP.keys():
+            raise osv.except_osv(
+                _('Error !'),
+                _('Operator %s not suported in searches for sale_num_invoiced \
+                   (product.product).' % op)
+            )
+        else:
+            todos = self.search(cr, uid, [], context=context)
+            ids = self.read(cr, uid, todos, ['sale_num_invoiced'],
+                            context=context)
+            for d in ids:
+                if OPERATOR_MAP[op](d['sale_num_invoiced'], value):
+                    product_ids.append(d['id'])
+
+        return [('id','in',tuple(product_ids))]
+
     _columns = {
         # Override this field ot have it stored; needed for the search view
         'sale_num_invoiced': fields.function(
@@ -138,7 +176,8 @@ class ProductProduct(osv.osv):
             type='float',
             string='# Invoiced in Sale',
             multi='product_margin',
-            store=True,
+            #store=True,
+            fnct_search=_sale_num_invoiced_search,
             help="Sum of Quantity in Customer Invoices"),
         # New columns
         'th_gross_margin': fields.function(
