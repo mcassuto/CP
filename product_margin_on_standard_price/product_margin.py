@@ -117,14 +117,16 @@ class ProductProduct(osv.osv):
                 res[val.id]['th_gross_margin'] =\
                     val.list_price - val.standard_price
             if 'th_gross_margin_rate' in field_names:
-                res[val.id]['th_gross_margin_rate'] =\
-                    res[val.id]['th_gross_margin']
+                res[val.id]['th_gross_margin_rate'] = \
+                    val.standard_price and \
+                    res[val.id]['th_gross_margin'] / val.standard_price * 100
             if 'gross_margin' in field_names:
                 res[val.id]['gross_margin'] =\
                     res[val.id]['sale_avg_price'] - val.standard_price
             if 'gross_margin_rate' in field_names:
-                res[val.id]['gross_margin_rate'] =\
-                    res[val.id]['gross_margin']
+                res[val.id]['gross_margin_rate'] = \
+                    val.standard_price and \
+                    res[val.id]['gross_margin'] / val.standard_price * 100
             if 'total_margin_on_cost' in field_names:
                 res[val.id]['total_margin_on_cost'] =\
                     res[val.id]['turnover'] -\
