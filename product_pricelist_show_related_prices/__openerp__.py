@@ -27,7 +27,14 @@
     'author': "Marc Cassuto <marc.cassuto@gmail.com>",
     'category': "Sales Management",
     'description': """
-    
+Show list price and cost price in pricelist
+===========================================
+
+When creating a pricelist, it can be usefull to have as a reference
+the current cost of the product and the default sale price.
+
+This module add this information on both the tree and form views of
+the product_pricelist_iten object (visible from the pricelist versions).
     
 Contributors
 ------------
