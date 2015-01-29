@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    <record id="view_move_date_search" model="ir.ui.view">
+      <field name="inherit_id" ref="stock.view_move_search" />
+      <field name="model">stock.move</field>
+      <field name="arch" type="xml">
+        <xpath expr="//filter[@string='Today']" position="after">
+          <group string="Periods" expand="1">
+              <filter string="Previous day" name="last_day"
+                  domain="[('date', '&gt;', (context_today() + relativedelta(days=-2)).strftime('%%Y-%%m-%%d')), ('date', '&lt;', (context_today() + relativedelta(days=0)).strftime('%%Y-%%m-%%d'))]"
+              />
+             <filter string="Previous week" name="last_week"
+                  domain="[('date', '&gt;', (context_today() + relativedelta(weeks=-2, weekday=6)).strftime('%%Y-%%m-%%d')), ('date', '&lt;=', (context_today() + relativedelta(weeks=-1, weekday=6)).strftime('%%Y-%%m-%%d'))]"
+              />
+             <filter string="Previous month" name="last_month"
+                  domain="[('date', '&gt;=', (context_today() + relativedelta(day=1, months=-1)).strftime('%%Y-%%m-%%d')), ('date', '&lt;=', (context_today() + relativedelta(day=31, months=-1)).strftime('%%Y-%%m-%%d'))]"
+              />
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>
+
