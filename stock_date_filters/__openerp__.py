@@ -40,6 +40,7 @@ Contributors
 """,
     'depends': [
         'stock',
+        'web_relativedelta',
     ],
     'external_dependencies': {
         'python': [],
