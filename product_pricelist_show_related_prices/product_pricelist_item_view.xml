@@ -26,6 +26,7 @@
                 <field name="product_tmpl_id" position="after">
                    <field name="list_price"/>
                    <field name="standard_price"/>
+                   <field name="computed_price"/>
                 </field>
             </field>
         </record>
