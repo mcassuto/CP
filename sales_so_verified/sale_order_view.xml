@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record id="view_order_verified_form" model="ir.ui.view">
+      <field name="name">sale.order.verified.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//page[@string='Other Information']" position="after">
+          <page string="Verification" groups="base.group_sale_manager">
+              <group>
+                <field name="verified"/>
+              </group>
+              <label for="verification_note"/>
+              <field name="verification_note"
+                     placeholder="Please provide explanation about this verification.."/>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+        <record id="sale_order_verified_search" model="ir.ui.view">
+            <field name="name">sale.order.verified.search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@string='Done']" position="after">
+                    <group string="Verification" expand="1">
+                      <filter string="Verified"
+                              domain="[('verified','=',True)]"/>
+                      <filter string="Not Verified"
+                              domain="[('verified','=',False)]"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
