@@ -28,7 +28,34 @@
     'author': "Marc Cassuto <marc.cassuto@gmail.com>",
     'category': "Sales",
     'description': """
-    
+
+This module allows to flag sales orders as 'verified'
+=====================================================
+
+Introduction
+------------
+
+Sometimes, a sales order can remain in state "Sale Order" and never being
+marked as 'done'. There is various explanation for that...
+
+So in some case, it can be useful to flag these sales orders in order to
+filter them out (or in).
+
+What this module does ?
+-----------------------
+
+It add a new tab 'Verification' in the sale order form, visible only by the
+sales managers.
+
+This tab contains to field :
+
+* a boolean to actually flag the sale order;
+* a text field to explain the reason of the flag.
+
+Any modification to theses fields will trigger a note in the tracker.
+
+Finally, 2 new filters 'Verified' and 'Not Verified' are added to the
+sale order search view.
     
 Contributors
 ------------
