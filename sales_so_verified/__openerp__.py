@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -56,7 +56,7 @@ Any modification to theses fields will trigger a note in the tracker.
 
 Finally, 2 new filters 'Verified' and 'Not Verified' are added to the
 sale order search view.
-    
+
 Contributors
 ------------
 * Marc Cassuto (marc.cassuto@gmail.com)

@@ -84,7 +84,7 @@ class ProductMarginStdPrice(osv.osv_memory):
         )
         view_res = cr.fetchone()[0]
 
-        #get the current product.margin object to obtain the values from it
+        # get the current product.margin object to obtain the values from it
         product_margin_obj = self.browse(cr, uid, ids, context=context)[0]
 
         context.update(invoice_state=product_margin_obj.invoice_state)

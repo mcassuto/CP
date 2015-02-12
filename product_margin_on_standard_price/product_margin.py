@@ -155,7 +155,7 @@ class ProductProduct(osv.osv):
             '>': o.gt,
             '<': o.lt,
             }
-        if not op in OPERATOR_MAP.keys():
+        if op not in OPERATOR_MAP.keys():
             raise osv.except_osv(
                 _('Error !'),
                 _('Operator %s not suported in searches for sale_num_invoiced \
@@ -169,7 +169,7 @@ class ProductProduct(osv.osv):
                 if OPERATOR_MAP[op](d['sale_num_invoiced'], value):
                     product_ids.append(d['id'])
 
-        return [('id','in',tuple(product_ids))]
+        return [('id', 'in', tuple(product_ids))]
 
     _columns = {
         # Override this field ot have it stored; needed for the search view
@@ -178,7 +178,6 @@ class ProductProduct(osv.osv):
             type='float',
             string='# Invoiced in Sale',
             multi='product_margin',
-            #store=True,
             fnct_search=_sale_num_invoiced_search,
             help="Sum of Quantity in Customer Invoices"),
         # New columns

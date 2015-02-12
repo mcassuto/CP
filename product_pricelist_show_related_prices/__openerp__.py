@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -35,7 +35,7 @@ the current cost of the product and the default sale price.
 
 This module add this information on both the tree and form views of
 the product_pricelist_iten object (visible from the pricelist versions).
-    
+
 Contributors
 ------------
 * Marc Cassuto (marc.cassuto@gmail.com)

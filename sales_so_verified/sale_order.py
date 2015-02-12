@@ -26,14 +26,14 @@ class SaleOrder(osv.osv):
     _inherit = "sale.order"
 
     _columns = {
-        'verified' : fields.boolean(
+        'verified': fields.boolean(
             'Verified ?',
             help="It indicates that this sales order has been verified.",
             track_visibility='onchange',
-            ),
+        ),
         'verification_note': fields.text(
             'Note about the verification',
             help="Please provide explanation about this verification.",
             track_visibility='onchange',
-            )
+        )
         }

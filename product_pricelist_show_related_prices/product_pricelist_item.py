@@ -54,7 +54,7 @@ class ProductPricelistItem(osv.osv):
                                       [product_id.id],
                                       'list_price',
                                       context=context
-                )[product_id.id],
+                                      )[product_id.id],
                 round=False,
                 context=context)
 
@@ -62,7 +62,7 @@ class ProductPricelistItem(osv.osv):
         return res
 
     def get_standard_price(self, cr, uid, ids, field_names=None, arg=False,
-                          context=None):
+                           context=None):
         res = {}
         if context is None:
             context = {}
@@ -86,7 +86,7 @@ class ProductPricelistItem(osv.osv):
                                       [product_id.id],
                                       'standard_price',
                                       context=context
-                )[product_id.id],
+                                      )[product_id.id],
                 round=False,
                 context=context)
 
@@ -94,7 +94,7 @@ class ProductPricelistItem(osv.osv):
         return res
 
     def get_computed_price(self, cr, uid, ids, field_names=None, arg=False,
-                          context=None):
+                           context=None):
         res = {}
         if context is None:
             context = {}
@@ -118,10 +118,10 @@ class ProductPricelistItem(osv.osv):
                 pricelist_currency_id = \
                     pvi.price_version_id.pricelist_id.currency_id.id
                 price_type = price_type_obj.browse(cr, uid, int(pvi.base))
-                uom_price_already_computed = True
-                #currency_ctx = dict(context,
+                # uom_price_already_computed = True
+                # currency_ctx = dict(context,
                 #                    currency_id = price_type.currency_id.id)
-                #price= product_id.price_get(price_type.field,
+                # price= product_id.price_get(price_type.field,
                 #                         context=currency_ctx)[product_id.id]
                 price = currency_obj.compute(
                     cr, uid,
@@ -131,7 +131,7 @@ class ProductPricelistItem(osv.osv):
                                           [product_id.id],
                                           price_type.field,
                                           context=context
-                    )[product_id.id],
+                                          )[product_id.id],
                     round=False,
                     context=context)
 
