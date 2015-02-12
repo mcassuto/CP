@@ -27,6 +27,7 @@
                    <field name="list_price"/>
                    <field name="standard_price"/>
                    <field name="computed_price"/>
+                   <field name="margin"/>
                 </field>
             </field>
         </record>
