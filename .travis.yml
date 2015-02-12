@@ -4,24 +4,23 @@ python:
   - "2.7"
 
 env:
-  - DATABASE="openerp_test"
+ - VERSION="7.0" ODOO_REPO="odoo/odoo" EXCLUDE="invoice_validation_wkfl"
+ - VERSION="7.0" ODOO_REPO="OCA/OCB" EXCLUDE="invoice_validation_wkfl"
+ - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="invoice_validation_wkfl"
+ - VERSION="7.0" ODOO_REPO="OCA/OCB" INCLUDE="invoice_validation_wkfl"
+ - VERSION="7.0" UNIT_TEST="1"
 
 virtualenv:
   system_site_packages: true
 
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone https://github.com/hbrunn/web.git -b 7.0-web_relativedelta_squashed ${HOME}/web
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-  - sudo apt-get install python-lxml
-  - pip install QUnitSuite flake8 coveralls
-  - pip install -r ${HOME}/maintainer-quality-tools/travis/requirements.txt
+  - travis_install_nightly
 
 script:
-#  - travis_run_flake8
-  - createdb ${DATABASE}
-  - ./openerp-server -d ${DATABASE} --addons-path=./openerp/addons,./addons --stop-after-init --init=all
-  - coverage run ./openerp-server -d ${DATABASE} --addons-path=./openerp/addons,./addons --stop-after-init --init=all --test-enable --log-level=test | tee stdout.log
-  - if grep -v mail stdout.log | egrep -q "(At least one test failed when loading the modules.|ERROR ${DATABASE})"; then exit 1; fi
+  - travis_run_tests
 
 after_success:
   coveralls
