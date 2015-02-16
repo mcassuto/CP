@@ -68,7 +68,7 @@ class BankAccRecStatement(osv.osv):
                     )
         return True
 
-    def copy(self, cr, uid, id, default={}, context=None):
+    def copy(self, cr, uid, id, default=None, context=None):
         default.update({
             'credit_move_line_ids': [],
             'debit_move_line_ids': [],
@@ -381,31 +381,31 @@ class BankAccRecStatement(osv.osv):
                 sres['sum_of_debits'] - sres['sum_of_credits'],
                 account_precision)
             sres['cleared_balance_in_currency'] = round(
-                (sres['sum_of_debits_in_currency']
-                 - sres['sum_of_credits_in_currency']),
+                (sres['sum_of_debits_in_currency'] -
+                 sres['sum_of_credits_in_currency']),
                 account_precision)
             sres['uncleared_balance'] = round(
                 sres['sum_of_debits_unclear'] - sres['sum_of_credits_unclear'],
                 account_precision)
             sres['uncleared_balance_in_currency'] = round(
-                (sres['sum_of_debits_unclear_in_currency']
-                 - sres['sum_of_credits_unclear_in_currency']),
+                (sres['sum_of_debits_unclear_in_currency'] -
+                 sres['sum_of_credits_unclear_in_currency']),
                 account_precision)
             sres['difference'] = round(
-                (statement.ending_balance - statement.starting_balance)
-                - sres['cleared_balance'],
+                (statement.ending_balance - statement.starting_balance) -
+                sres['cleared_balance'],
                 account_precision)
             sres['difference_in_currency'] = round(
-                (statement.ending_balance_in_currency
-                 - sres['cleared_balance_in_currency']
-                 - statement.starting_balance_in_currency),
+                (statement.ending_balance_in_currency -
+                 sres['cleared_balance_in_currency'] -
+                 statement.starting_balance_in_currency),
                 account_precision)
             sres['general_ledger_balance'] = self._get_gl_balance(
                 cr, uid, statement.account_id.id, statement.ending_date)
             sres['registered_balance'] = round(
-                (statement.starting_balance
-                 + sres['cleared_balance']
-                 + sres['uncleared_balance']),
+                (statement.starting_balance +
+                 sres['cleared_balance'] +
+                 sres['uncleared_balance']),
                 account_precision)
 
         return res
@@ -484,7 +484,7 @@ class BankAccRecStatement(osv.osv):
                                                      line_ids,
                                                      context=context):
                 if obj.keep_previous_uncleared_entries:
-                    #only take bank_acc_rec_statement at state cancel or done
+                    # Only take bank_acc_rec_statement at state cancel or done
                     if not self.is_b_a_r_s_state_done(cr, uid,
                                                       line.id,
                                                       context=context):
@@ -602,7 +602,7 @@ class BankAccRecStatement(osv.osv):
                                                      line_ids,
                                                      context=context):
                 if keep_previous_uncleared_entries:
-                    #only take bank_acc_rec_statement at state cancel or done
+                    # Only take bank_acc_rec_statement at state cancel or done
                     if not self.is_b_a_r_s_state_done(cr, uid,
                                                       line.id,
                                                       context=context):

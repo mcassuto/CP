@@ -20,10 +20,11 @@
 #
 ##############################################################################
 
-from osv import fields,osv
+from osv import fields, osv
 
-class account_move_line(osv.osv):
-    _inherit='account.move.line'
+
+class AccountMoveLine(osv.osv):
+    _inherit = 'account.move.line'
 
     _columns = {
         'cleared_bank_account': fields.boolean(
@@ -48,6 +49,6 @@ class account_move_line(osv.osv):
             draft_assigned_to_statement=False,
         )
 
-        return super(account_move_line, self).copy_data(cr, uid, id,
-                                                        default=default,
-                                                        context=context)
+        return super(AccountMoveLine, self).copy_data(cr, uid, id,
+                                                      default=default,
+                                                      context=context)
