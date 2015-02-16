@@ -13,7 +13,7 @@ virtualenv:
 
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone https://github.com/OCA/account-closing.git ${HOME}/account-closing
+  - git clone https://github.com/OCA/account-closing.git -b 7.0 ${HOME}/account-closing
   - git clone https://github.com/hbrunn/web.git -b 7.0-web_relativedelta_squashed ${HOME}/web
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
