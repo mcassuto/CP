@@ -19,7 +19,4 @@
 #
 ##############################################################################
 
-from . import (
-    invoice_report,
-    wizard
-)
+from . import invoice_report

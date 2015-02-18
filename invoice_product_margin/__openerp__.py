@@ -29,16 +29,38 @@
     'summary': 'Product Margins in invoices based on list & standard prices',
 
     'description': """
-Invoice Analysis Extra Group By
-===============================
+Product Margins in Invoices
+===========================
 
-This module adds the "Partner Country", "Salesteam", "Invoice"
-and "Currency" "Invoice" grouping options for the Invoice Analysis Report.
+This module computes product's margin based on the invoice lines.
+
+It adds a new report :
+
+* Reporting \ Accounting \ Product Maring on Invoices
+
+This report is showing the following columns :
+
+* group: the main grouping column, by default the product
+* Manuf. Cost: the 'Cost price' field from the product
+* List Price: the 'List Price' field from the product
+* Gross Margin on list price: calculated as List price - Cost price
+* Gross Margin on list price (%): Gross Margin on list price rate
+* Avg. Invoiced Price: Average price in customer invoices
+* Gross Margin on invoices: calculated as Average Invoiced Price - Cost price
+* Gross Margin on invoices (%): Gross Margin on invoices rate
+* Total Margin on cost: calculated as Gross Margin on invoices * qty
+
+All prices are in the company's main currency
+
+Backround
+---------
+This modules depends on module invoice_report_extra_groupby
+which add in the invoice lines the total amount converted to the company's
+currency.
 
 Contributors
 ------------
 * Marc Cassuto (marc.cassuto@gmail.com)
-* Vincent Vinet (vincent.vinet@savoirfairelinux.com)
 """,
     'depends': [
         'account',
@@ -48,7 +70,6 @@ Contributors
         'python': [],
     },
     'data': [
-        'wizard/product_margin_view.xml',
         'report_invoice_margin_view.xml',
     ],
     'installable': True,

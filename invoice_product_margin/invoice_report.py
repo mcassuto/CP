@@ -33,17 +33,6 @@ class InvoiceProductMargin(osv.osv):
     _auto = False
     _rec_name = 'date'
 
-    def _product_margin(self, cr, uid, ids, field_names, arg, context=None):
-        res = {}
-        if context is None:
-            context = {}
-
-        for val in self.browse(cr, uid, ids, context=context):
-            res[val.id] = {}
-            date_from = context.get('date_from', time.strftime('%Y-01-01'))
-            date_to = context.get('date_to', time.strftime('%Y-12-31'))
-            states = ('open', 'paid')
-
     _columns = {
         'date': fields.date(
             'Date',
