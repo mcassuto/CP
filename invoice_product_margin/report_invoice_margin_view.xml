@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record id="view_invoice_margins_report_search" model="ir.ui.view">
+      <field name="name">invoice.margins.report.search</field>
+      <field name="model">invoice.product.margin</field>
+      <field name="arch" type="xml">
+          <search string="Invoices Analysis">
+               <filter string="Year"
+                       name="year"
+                       domain="[('date','&lt;=', time.strftime('%%Y-%%m-%%d')),('date','&gt;=',time.strftime('%%Y-01-01'))]" help="year"/>
+               <filter string="Last Month"
+                       name="last_month"
+                       domain="[('date', '&gt;=', (context_today() + relativedelta(day=1, months=-1)).strftime('%%Y-%%m-%%d')), ('date', '&lt;=', (context_today() + relativedelta(day=31, months=-1)).strftime('%%Y-%%m-%%d'))]" />
+
+              <group expand="1" string="Group By...">
+                  <filter string="Product"
+                          name="product"
+                          context="{'group_by':'product_id','set_visible':True}"/>
+                  <filter string="Invoice"
+                          context="{'group_by': 'invoice_id'}" />
+                  <filter string="Partner"
+                          context="{'group_by': 'partner_id'}" />
+                  <filter string="Date"
+                          context="{'group_by': 'date'}" />
+              </group>
+          </search>
+      </field>
+    </record>
+
+    <record id="view_invoice_margins_report_tree" model="ir.ui.view">
+        <field name="name">invoice.margins.report.tree</field>
+        <field name="model">invoice.product.margin</field>
+        <field name="arch" type="xml">
+            <tree string="Invoices Analysis">
+                <field name="standard_price"/>
+                <field name="th_gross_margin_rate"/>
+                <field name="list_price"/>
+                <field name="th_gross_margin"/>
+                <field name="price_average"/>
+                <field name="gross_margin_rate"/>
+                <field name="gross_margin"/>
+                <field name="product_qty" sum="Qty"/>
+                <field name="total_in_main_currency"
+                       sum="Total Without Tax"
+                       invisible="1"/>
+                <field name="total_margin_on_cost" sum="Total Margin"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_invoice_margins_report" model="ir.actions.act_window">
+        <field name="name">Invoices Margins (all prices in main currency)</field>
+        <field name="res_model">invoice.product.margin</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_last_month':1, 'search_default_product': 1, 'group_by_no_leaf':1,}</field>
+        <field name="help">From this report, from your margins per product
+            or customer, based on the invoices. All prices are in the
+            company's main currency.</field>
+    </record>
+
+    <menuitem
+            id="menu_action_invoice_margins_report"
+            name="Product Margin on Invoices"
+            parent="account.menu_finance_reporting"
+            action="action_invoice_margins_report"/>
+
+    </data>
+</openerp>

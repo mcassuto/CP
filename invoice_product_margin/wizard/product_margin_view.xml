@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_margin_std_price_wizard_view" model="ir.ui.view">
+            <field name="name">product.margin.std.price.wizard</field>
+            <field name="model">invoice.product.margin.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Properties categories" version="7.0">
+                    <group col="4" string="Parameters">
+                        <field name="from_date" />
+                        <field name="to_date" />
+                    </group>
+                    <footer>
+                        <button name="action_open_window"
+                                string="Open Margins"
+                                type="object"
+                                class="oe_highlight"  />
+                        or
+                        <button string="Cancel"
+                                class="oe_link"
+                                special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Product Margin on Invoices"
+            res_model="invoice.product.margin.wizard"
+            src_model="invoice.product.margin"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="invoice_product_margin_wizard_act_window"/>
+
+    </data>
+</openerp>
