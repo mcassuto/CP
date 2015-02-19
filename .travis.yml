@@ -11,6 +11,10 @@ env:
 virtualenv:
   system_site_packages: true
 
+before_install:
+  - sudo apt-get install libxml2-dev
+  - sudo apt-get install libxslt1-dev
+
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - git clone https://github.com/OCA/account-closing.git -b 7.0 ${HOME}/account-closing
