@@ -18,14 +18,8 @@
 #
 ##############################################################################
 
-import re
-import time
 from openerp import tools
 from openerp.osv import fields, osv
-
-
-RATE = r'(?P<field>sub.price_(total|average))\s*/\s*cr.rate as (?P<field_as>price_*)'  # noqa
-RATE_SUB = '\g<field> as \g<field_as>'
 
 
 class InvoiceProductMargin(osv.osv):
@@ -103,11 +97,18 @@ class InvoiceProductMargin(osv.osv):
                 sub.price_total_in_currency as total_in_main_currency,
                 sub.standard_price, sub.list_price,
                 (sub.list_price - sub.standard_price) as th_gross_margin,
-                ( (sub.list_price - sub.standard_price) * 100 / nullif(sub .standard_price,0)) as th_gross_margin_rate,
-                ( sub.price_total_in_currency / nullif(sub.product_qty, 0) ) as price_average,
-                ( (sub.price_total_in_currency / nullif(sub.product_qty, 0)) - standard_price) as gross_margin,
-                ( ((sub.price_total_in_currency / nullif(sub.product_qty, 0)) - standard_price) * 100 / nullif(sub.standard_price,0)) as gross_margin_rate,
-                ( ((sub.price_total_in_currency / nullif(sub.product_qty, 0 )) - standard_price) * sub.product_qty) as total_margin_on_cost
+                ( (sub.list_price - sub.standard_price) * 100 / nullif(sub
+                    .standard_price,0)) as th_gross_margin_rate,
+                ( sub.price_total_in_currency / nullif(sub.product_qty,
+                    0) ) as price_average,
+                ( (sub.price_total_in_currency / nullif(sub.product_qty,
+                    0)) - standard_price) as gross_margin,
+                ( ((sub.price_total_in_currency / nullif(sub.product_qty,
+                    0)) - standard_price) * 100 / nullif(sub.standard_price,
+                    0)) as gross_margin_rate,
+                ( ((sub.price_total_in_currency / nullif(sub.product_qty,
+                    0 )) - standard_price) * sub.product_qty)
+                    as total_margin_on_cost
         """
         return select_str
 
@@ -117,7 +118,10 @@ class InvoiceProductMargin(osv.osv):
                     ai.date_invoice AS date, ai.partner_id,
                     ai.currency_id, ail.product_id,
                     SUM(CASE
-                        WHEN ai.type::text = ANY (ARRAY['out_refund'::character varying::text, 'in_invoice'::character varying::text])
+                        WHEN ai.type::text = ANY (
+                            ARRAY['out_refund'::character varying::text,
+                            'in_invoice'::character varying::text]
+                            )
                             THEN (- ail.quantity) / u.factor
                             ELSE ail.quantity / u.factor
                         END) AS product_qty,
@@ -126,9 +130,9 @@ class InvoiceProductMargin(osv.osv):
                         WHEN ai.type::text = ANY (
                             ARRAY['out_refund'::character varying::text,
                             'in_invoice'::character varying::text]
-                        )
-                        THEN - ail.price_subtotal_in_currency
-                        ELSE ail.price_subtotal_in_currency
+                            )
+                            THEN - ail.price_subtotal_in_currency
+                            ELSE ail.price_subtotal_in_currency
                         END) AS price_total_in_currency,
                     pt.standard_price, pt.list_price
         """
