@@ -31,7 +31,7 @@ class InvoiceProductMargin(osv.osv):
         'date': fields.date(
             'Date',
             readonly=True),
-        'partner_id': fields.many2one(
+        'commercial_partner_id': fields.many2one(
             'res.partner',
             'Partner',
             readonly=True),
@@ -57,6 +57,10 @@ class InvoiceProductMargin(osv.osv):
         'invoice_id': fields.many2one(
             'account.invoice',
             'Invoice',
+            readonly=True),
+        'currency_id': fields.many2one(
+            'res.currency',
+            'Currency',
             readonly=True),
         'total_in_main_currency': fields.float(
             'Total',
@@ -92,7 +96,8 @@ class InvoiceProductMargin(osv.osv):
 
     def _select(self):
         select_str = """
-            SELECT sub.id, sub.date, sub.currency_id, sub.partner_id,
+            SELECT sub.id, sub.date, sub.currency_id,
+                sub.commercial_partner_id as commercial_partner_id,
                 sub.product_id, sub.product_qty, sub.invoice_id as invoice_id,
                 sub.price_total_in_currency as total_in_main_currency,
                 sub.standard_price, sub.list_price,
@@ -115,7 +120,8 @@ class InvoiceProductMargin(osv.osv):
     def _sub_select(self):
         select_str = """
                 SELECT min(ail.id) AS id,
-                    ai.date_invoice AS date, ai.partner_id,
+                    ai.date_invoice AS date,
+                    ai.commercial_partner_id as commercial_partner_id,
                     ai.currency_id, ail.product_id,
                     SUM(CASE
                         WHEN ai.type::text = ANY (
@@ -156,7 +162,8 @@ class InvoiceProductMargin(osv.osv):
 
     def _sub_group_by(self):
         group_by_str = """
-                GROUP BY ail.product_id, ai.date_invoice, ai.id, ai.partner_id,
+                GROUP BY ail.product_id, ai.date_invoice, ai.id,
+                    ai.commercial_partner_id,
                     ai.currency_id, pt.standard_price, pt.list_price
         """
         return group_by_str

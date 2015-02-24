@@ -21,9 +21,11 @@
                   <filter string="Invoice"
                           context="{'group_by': 'invoice_id'}" />
                   <filter string="Partner"
-                          context="{'group_by': 'partner_id'}" />
+                          context="{'group_by': 'commercial_partner_id'}" />
                   <filter string="Date"
                           context="{'group_by': 'date'}" />
+                  <filter string="Currency"
+                          context="{'group_by': 'currency_id'}" />
               </group>
           </search>
       </field>
