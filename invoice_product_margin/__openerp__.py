@@ -71,6 +71,7 @@ Contributors
     },
     'data': [
         'report_invoice_margin_view.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
 }
